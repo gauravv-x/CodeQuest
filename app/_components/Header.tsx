@@ -1,6 +1,7 @@
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import React from 'react'
+'use client';
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import React from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -8,8 +9,9 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import Link from 'next/link';
+} from "@/components/ui/navigation-menu";
+import Link from "next/link";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const courses = [
   {
@@ -62,14 +64,14 @@ const courses = [
   },
   {
     id: 9,
-     name: "Machine Learning",
+    name: "Machine Learning",
     desc: "Understand ML concepts, algorithms, data preprocessing, model training, evaluation, and deployment.",
     path: "/course/9/detail",
   },
 ];
 
-
 function Header() {
+  const {user}= useUser();
   return (
     <div className="p-4 max-w-7xl flex justify-between items-center w-full">
       <div className="flex gap-2 items-center ">
@@ -78,42 +80,49 @@ function Header() {
       </div>
       {/* Navbar  */}
       <NavigationMenu>
-        <NavigationMenuList className='gap-8'>
+        <NavigationMenuList className="gap-8">
           <NavigationMenuItem>
             <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className='grid md:grid-cols-2 gap-2 sm:w-[400px] md:w-[500px] lg:w-[600px]'>
+              <ul className="grid md:grid-cols-2 gap-2 sm:w-[400px] md:w-[500px] lg:w-[600px]">
                 {courses.map((course, index) => (
-                    <div key={index} className='p-2 hover:bg-accent rounded-xl cursor-pointer'>
-                    <h2 className='font-medium'>{course.name}</h2>
-                    <p className='text-sm text-gray-500 '>{course.desc}</p>
-                </div> ))}
+                  <div key={index}
+                    className="p-2 hover:bg-accent rounded-xl cursor-pointer"
+                  >
+                    <h2 className="font-medium">{course.name}</h2>
+                    <p className="text-sm text-gray-500 ">{course.desc}</p>
+                  </div>
+                ))}
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-            <NavigationMenuItem>
-                <NavigationMenuLink> 
-                    <Link href={"/project"}>Projects</Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-            <NavigationMenuItem>
-                <NavigationMenuLink> 
-                    <Link href={"/pricing"}>Pricing</Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-            <NavigationMenuItem>
-                <NavigationMenuLink> 
-                    <Link href={"/contact-us"}>Contact Us</Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink>
+              <Link href={"/project"}>Projects</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink>
+              <Link href={"/pricing"}>Pricing</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink>
+              <Link href={"/contact-us"}>Contact Us</Link>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      {/* sign in Button */}
-      <Button variant={"pixel"} className="font-game text-2xl">
-        Sign In
-      </Button>
+      {/* signup Button */}
+      {!user? 
+      <Link href={'sign-in'}>
+        <Button variant={"pixel"} className="font-game text-2xl">Signin</Button> </Link> 
+      :<div className="flex gap-4 items-center"><Button variant={"pixel"} className="font-game text-2xl">Dashboard</Button>
+       <UserButton/>
+       </div>}
+      
     </div>
   );
 }
 
-export default Header
+export default Header;
