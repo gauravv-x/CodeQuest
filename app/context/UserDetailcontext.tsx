@@ -2,7 +2,7 @@
 import { createContext } from "react";
 
 export const UserDetailContext = createContext<any>({
-    userdetail : undefined,
+    userDetail : undefined,
     setUserDetail : ( )=>{ }
 
 });

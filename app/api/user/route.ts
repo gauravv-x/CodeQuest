@@ -8,8 +8,10 @@ export async function POST(req: NextRequest) {
 
     const user= await currentUser();
 
-    //@ts-ignore if user  already exists 
-    const users = await db.select().from(usersTable).where(eq(usersTable.email, user?.primaryEmailAddress?.emailAddress));
+    if (!user?.primaryEmailAddress?.emailAddress) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+     const users = await db.select().from(usersTable).where(eq(usersTable?.email, user?.primaryEmailAddress?.emailAddress));
 
     // if not create new user data 
     if (users.length <= 0) {
@@ -27,6 +29,6 @@ export async function POST(req: NextRequest) {
 
     }
 
-    return NextResponse.json({user:users[0]});
+    return NextResponse.json(users[0]);
 
 }
