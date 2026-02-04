@@ -1,7 +1,5 @@
-import Image from "next/image";
-import Header from "./_components/Header";
 import Hero from "./_components/Hero";
-import { Button } from "@/components/ui/button";
+
 
 
 /**
@@ -14,16 +12,9 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <div className="flex flex-col items-center">
-      {/* Header / Navbar */}
-        <Header />
-      
-
-      {/* Hero Section */}
+            {/* Hero Section */}
          <Hero />
 
-      
-      
-  
     </div>
   );
 }
