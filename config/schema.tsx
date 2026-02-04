@@ -1,4 +1,6 @@
 import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import { Tags } from "lucide-react";
+import { title } from "process";
 
 export const usersTable = pgTable("users", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
@@ -8,3 +10,12 @@ export const usersTable = pgTable("users", {
   subscription: varchar(),
 });
 
+export const CoursesTable = pgTable("courses", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  courseid: integer().notNull().unique(),
+  title: varchar().notNull(),
+  desc: varchar().notNull(),
+  bannerImage: varchar().notNull(),
+  level: varchar().default('Beginner'),
+  tags: varchar(),
+});
