@@ -37,22 +37,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (<ClerkProvider>
-    <html lang="en" suppressHydrationWarning className='dark'>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} 
+  return (
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning className="dark">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} 
         ${GameFont.variable} ${inter.variable} 
         antialiased`}
-      >
-        <Provider 
+        >
+          <Provider
             attribute="class"
             defaultTheme="dark"
             enableSystem
-            disableTransitionOnChange>
-        {children}
-        </Provider>
-      </body>
-    </html>
+            disableTransitionOnChange
+          >
+            {children}
+          </Provider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }

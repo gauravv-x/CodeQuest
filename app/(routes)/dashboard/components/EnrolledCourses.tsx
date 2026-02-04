@@ -1,0 +1,23 @@
+'use client'
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import React, { useState } from 'react'
+
+function EnrolledCourses() {
+    const [enrolledCourses, setEnrolledCourses] = useState([])
+  return <div className='mt-8'>
+    <h2 className='text-3xl mb-2 font-game'>Your Enrolled Courses</h2>
+    {enrolledCourses?.length == 0 ? 
+  <div className='flex flex-col items-center gap-3 p-7 border rouned-2xl bg-zinc-900'>
+        <Image src={'/books.png'} alt='Book' width={90} height={90}/>
+        <h2 className='font-game text-xl'>You Don't have enrolled courses.</h2>
+        <Button variant={'pixel'} size={'lg'} className='font-game text-lg'>Browser All Courses</Button>
+
+  </div>
+  :<div>
+    </div>
+    }
+    </div>;
+}
+
+export default EnrolledCourses
