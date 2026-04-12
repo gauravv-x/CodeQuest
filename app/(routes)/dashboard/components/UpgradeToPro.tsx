@@ -11,7 +11,11 @@ function UpgradeToPro() {
       <h2 className='font-game text-3xl'>Upgrade to Pro</h2>
       <p className='font-game text-gray-500 text-xl text-center'>Get access to All Courses by upgrading to Pro.</p>
       <Link href={'/pricing'}>
+<<<<<<< HEAD
       <Button className='font-game text-xl' variant={'pixel'} size={'lg'}>Upgrade</Button>
+=======
+      <Button className='font-game text-2xl mt-2' variant={'pixel'} size={'lg'}>Upgrade</Button>
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
       </Link>
     </div>
   )

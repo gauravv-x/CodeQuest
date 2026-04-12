@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 import * as Clerk from "@clerk/elements/common";
 
@@ -8,53 +9,147 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen grid w-full items-center bg-zinc-900 px-4 font-mono text-sm text-white">
       <SignUp.Root>
+=======
+'use client'
+
+import * as Clerk from '@clerk/elements/common'
+import * as SignUp from '@clerk/elements/sign-up'
+import Image from 'next/image'
+import { useState } from 'react'
+
+export default function SignUpPage() {
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState('')
+
+  return (
+    <div className="min-h-screen grid w-full items-center bg-zinc-900 px-4 font-mono text-sm text-white">
+      <SignUp.Root>
+
+        {/* START STEP */}
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
         <SignUp.Step
           name="start"
           className="mx-auto w-full sm:w-96 space-y-6 bg-zinc-800 px-4 py-8 border-4 border-black shadow-[8px_8px_0_0_#000]"
         >
           <header className="text-center flex flex-col items-center">
+<<<<<<< HEAD
              <Image src={'/logo.png'} alt="Clover Logo" width={40} height={40} />
         
             <h1 className="mt-3 text-base font-samibold tracking-wide text-yellow-400 uppercase font-game">
+=======
+            <Image src={'/logo.png'} alt="Clover Logo" width={40} height={40} />
+            <h1 className="mt-3 text-base font-semibold tracking-wide text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
               Create Account
             </h1>
           </header>
 
           <Clerk.GlobalError className="block text-sm text-red-500" />
 
+<<<<<<< HEAD
           <div className="space-y-4">
             <Clerk.Field name="emailAddress" className="space-y-1">
               <Clerk.Label className="font-samibold text-yellow-400 uppercase font-game">
+=======
+          {/* ERROR POPUP */}
+          {error && (
+            <div className="bg-red-500 text-white text-xs px-3 py-2 rounded text-center">
+              {error}
+            </div>
+          )}
+
+          <div className="space-y-4">
+
+            {/* EMAIL */}
+            <Clerk.Field name="emailAddress" className="space-y-1">
+              <Clerk.Label className="font-semibold text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
                 Email
               </Clerk.Label>
 
               <Clerk.Input
                 type="email"
                 required
+<<<<<<< HEAD
+=======
+                placeholder="Enter your email"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
                 className="w-full px-3 py-2 bg-zinc-900 border-2 border-black shadow-[3px_3px_0_0_#000] outline-none focus:border-yellow-400 text-white"
               />
 
               <Clerk.FieldError className="text-sm text-red-500" />
             </Clerk.Field>
 
+<<<<<<< HEAD
             <Clerk.Field name="password" className="space-y-1">
               <Clerk.Label className="font-samibold text-yellow-400 uppercase font-game">
+=======
+            {/* PASSWORD */}
+            <Clerk.Field name="password" className="space-y-1">
+              <Clerk.Label className="font-semibold text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
                 Password
               </Clerk.Label>
 
               <Clerk.Input
                 type="password"
                 required
+<<<<<<< HEAD
+=======
+                placeholder="Min 8 characters"
+                onChange={(e) => setPassword(e.target.value)}
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
                 className="w-full px-3 py-2 bg-zinc-900 border-2 border-black shadow-[3px_3px_0_0_#000] outline-none focus:border-yellow-400 text-white"
               />
 
               <Clerk.FieldError className="text-sm text-red-500" />
             </Clerk.Field>
+<<<<<<< HEAD
           </div>
 
           <SignUp.Action
             submit
             className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-samibold uppercase font-game"
+=======
+
+            {/* CONFIRM PASSWORD */}
+            <div className="space-y-1">
+              <label className="font-semibold text-yellow-400 uppercase font-game">
+                Confirm Password
+              </label>
+
+              <input
+                type="password"
+                required
+                placeholder="Re-enter password"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-3 py-2 bg-zinc-900 border-2 border-black shadow-[3px_3px_0_0_#000] outline-none focus:border-yellow-400 text-white"
+              />
+            </div>
+
+          </div>
+
+          {/* SIGN UP BUTTON */}
+          <SignUp.Action
+            submit
+            onClick={(e) => {
+              if (password !== confirmPassword) {
+                e.preventDefault()
+                setError('Passwords do not match')
+                return
+              }
+
+              if (password.length < 8) {
+                e.preventDefault()
+                setError('Password must be at least 8 characters')
+                return
+              }
+
+              setError('')
+            }}
+            className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-semibold uppercase font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
           >
             Sign Up
           </SignUp.Action>
@@ -63,21 +158,33 @@ export default function SignUpPage() {
             Already have an account?{" "}
             <Clerk.Link
               navigate="sign-in"
+<<<<<<< HEAD
               className="font-samibold underline underline-offset-2 hover:text-yellow-200 font-game"
+=======
+              className="font-semibold underline underline-offset-2 hover:text-yellow-200 font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
             >
               Sign in
             </Clerk.Link>
           </p>
         </SignUp.Step>
 
+<<<<<<< HEAD
         {/* Verification Step */}
 
+=======
+        {/* VERIFICATION STEP */}
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
         <SignUp.Step
           name="verifications"
           className="mx-auto w-full sm:w-96 space-y-6 bg-zinc-800 px-4 py-8 border-4 border-black shadow-[8px_8px_0_0_#000]"
         >
           <header className="text-center">
+<<<<<<< HEAD
             <h1 className="mt-3 text-base font-samibold tracking-wide text-yellow-400 uppercase font-game">
+=======
+            <h1 className="mt-3 text-base font-semibold tracking-wide text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
               Verify Email Code
             </h1>
           </header>
@@ -86,7 +193,11 @@ export default function SignUpPage() {
 
           <SignUp.Strategy name="email_code">
             <Clerk.Field name="code" className="space-y-1">
+<<<<<<< HEAD
               <Clerk.Label className="font-samibold text-yellow-400 uppercase font-game">
+=======
+              <Clerk.Label className="font-semibold text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
                 Email Code
               </Clerk.Label>
 
@@ -101,7 +212,11 @@ export default function SignUpPage() {
 
             <SignUp.Action
               submit
+<<<<<<< HEAD
               className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-samibold uppercase font-game"
+=======
+              className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-semibold uppercase font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
             >
               Verify
             </SignUp.Action>
@@ -111,21 +226,33 @@ export default function SignUpPage() {
             Already have an account?{" "}
             <Clerk.Link
               navigate="sign-in"
+<<<<<<< HEAD
               className="font-samibold underline underline-offset-2 hover:text-yellow-200 font-game"
+=======
+              className="font-semibold underline underline-offset-2 hover:text-yellow-200 font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
             >
               Sign in
             </Clerk.Link>
           </p>
         </SignUp.Step>
 
+<<<<<<< HEAD
         {/* Continue Registration Step */}
 
+=======
+        {/* CONTINUE STEP */}
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
         <SignUp.Step
           name="continue"
           className="mx-auto w-full sm:w-96 space-y-6 bg-zinc-800 px-4 py-8 border-4 border-black shadow-[8px_8px_0_0_#000]"
         >
           <header className="text-center">
+<<<<<<< HEAD
             <h1 className="mt-3 text-base font-samibold tracking-wide text-yellow-400 uppercase font-game">
+=======
+            <h1 className="mt-3 text-base font-semibold tracking-wide text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
               Continue Registration
             </h1>
           </header>
@@ -133,7 +260,11 @@ export default function SignUpPage() {
           <Clerk.GlobalError className="block text-sm text-red-500" />
 
           <Clerk.Field name="username" className="space-y-1">
+<<<<<<< HEAD
             <Clerk.Label className="font-samibold text-yellow-400 uppercase font-game">
+=======
+            <Clerk.Label className="font-semibold text-yellow-400 uppercase font-game">
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
               Username
             </Clerk.Label>
 
@@ -148,7 +279,11 @@ export default function SignUpPage() {
 
           <SignUp.Action
             submit
+<<<<<<< HEAD
             className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-samibold uppercase font-game"
+=======
+            className="w-full px-4 py-2 bg-yellow-400 border-2 border-black shadow-[4px_4px_0_0_#000] active:translate-y-[2px] active:shadow-none text-black font-semibold uppercase font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
           >
             Continue
           </SignUp.Action>
@@ -157,13 +292,25 @@ export default function SignUpPage() {
             Already have an account?{" "}
             <Clerk.Link
               navigate="sign-in"
+<<<<<<< HEAD
               className="font-samibold underline underline-offset-2 hover:text-yellow-200 font-game"
+=======
+              className="font-semibold underline underline-offset-2 hover:text-yellow-200 font-game"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
             >
               Sign in
             </Clerk.Link>
           </p>
         </SignUp.Step>
+<<<<<<< HEAD
       </SignUp.Root>
     </div>
   );
 }
+=======
+
+      </SignUp.Root>
+    </div>
+  )
+}
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)

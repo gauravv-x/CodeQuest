@@ -3,6 +3,11 @@ import { useUser } from '@clerk/nextjs'
 import Image from 'next/image'
 import React from 'react'
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
 function UserStatus() {
   const {user} = useUser();
   return (
@@ -10,7 +15,11 @@ function UserStatus() {
       <div className="flex gap-3 items-center">
         <Image
           src={"/alex_walk.gif"}
+<<<<<<< HEAD
           alt="Walking User"
+=======
+          alt="Wlaking User"
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
           width={70}
           height={70}
         />
@@ -27,7 +36,11 @@ function UserStatus() {
           </div>
         </div>
         <div className="flex gap-2 items-center">
+<<<<<<< HEAD
           <Image src={"/badge.png"} alt="badge" width={35} height={35} />
+=======
+          <Image src={"/badge.png"} alt="star" width={35} height={35} />
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
           <div>
             <h2 className="text-3xl font-game">3</h2>
             <h2 className="font-game text-xl text-gray-500">Badge</h2>

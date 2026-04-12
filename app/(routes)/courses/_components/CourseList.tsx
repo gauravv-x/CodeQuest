@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ChartNoAxesColumn, ChartNoAxesColumnIncreasingIcon } from 'lucide-react';
 import Image from 'next/image';
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 
     type Course = {
@@ -12,6 +13,37 @@ import React, { useEffect, useState } from 'react'
         level: string;
         bannerImage: string;       
         tag: string;
+=======
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react'
+
+export type Course = {
+        id: number,
+        courseid: number,
+        title: string,
+        desc: string,
+        level: string,
+        bannerImage: string,       
+        tag: string,
+        chapters?:Chapter
+    }
+
+    type Chapter = {
+        chapterId: number,
+        courseId: number,
+        desc : string,
+        name : string,  
+        id: number,
+        exrcises: exercise[]
+    }
+
+    type exercise = {
+        name: string,
+        slug: string,
+        xp: number,
+        difficulty: string,
+
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
     }
 
 
@@ -34,7 +66,13 @@ function CourseList() {
 
   return (
     <div className='grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 gap-5 mt-3'>
+<<<<<<< HEAD
         {courseList?.map((course, index) => (
+=======
+        
+        {courseList?.map((course, index) => (
+            <Link href={'/courses/' + course?.courseId} key={index}>
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
         <div key={index} className='border-4 rounded-xl hover:bg-zinc-900 cursor-pointer'>
             <Image src={(course?.bannerImage).trimEnd()} width={400}
             height={400} alt={course?.title}            
@@ -50,8 +88,16 @@ function CourseList() {
             </h2>
             </div>    
         </div>
+<<<<<<< HEAD
         ))}
     </div>
+=======
+
+        </Link>
+        ))}
+    </div>
+    
+>>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
   )
 }
 
