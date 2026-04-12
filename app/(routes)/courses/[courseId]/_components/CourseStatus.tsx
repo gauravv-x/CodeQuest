@@ -36,8 +36,7 @@ function CourseStatus({ courseDetail }: Props) {
 
     const UpdateProgress =(currentValue:number, totalValue:number)=>{
         if(totalValue && totalValue ) {
-            const perc = (currentValue*100)/totalValue;
-            return perc
+            const perc = (currentValue*100)
         }
 
         return 0;
