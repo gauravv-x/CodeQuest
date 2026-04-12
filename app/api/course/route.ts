@@ -1,23 +1,15 @@
+import EnrolledCourses from "@/app/(routes)/dashboard/components/EnrolledCourses";
 import { db } from "@/config/db";
-<<<<<<< HEAD
-import { CoursesTable } from "@/config/schema";
-=======
-import { CourseChaptersTable, CoursesTable } from "@/config/schema";
-import { asc, eq } from "drizzle-orm";
->>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)
+import { CourseChaptersTable, CoursesTable, EnrolledCourseTable } from "@/config/schema";
+import { currentUser } from "@clerk/nextjs/server";
+import { and, asc, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req:NextRequest) {
         
-<<<<<<< HEAD
-        //Fatch all courses from database
-        const result = await db.select().from(CoursesTable);
-
-        return NextResponse.json(result);
-}
-=======
         const { searchParams } = new URL(req.url);
         const courseId = searchParams.get('courseid');
+        const user = await currentUser();
 
 if(courseId){
         const result = await db.select().from(CoursesTable)
@@ -29,10 +21,17 @@ if(courseId){
         //@ts-ignore
         .where(eq(CourseChaptersTable.courseId, courseId));
 
+        const enrolledCourse = await db.select().from(EnrolledCourseTable)
+        //@ts-ignore
+        .where(and(eq(EnrolledCourseTable?.courseId, courseId),eq(EnrolledCourseTable?.userId, user?.primaryEmailAddress?.emailAddress)));
+
+        const isEnrolledCourse = enrolledCourse.length>0?true:false; 
         return NextResponse.json(
                 {
                 ...result[0], 
-                chapters: chapterResult
+                chapters: chapterResult,
+                userEnrolled: isEnrolledCourse,
+                courseEnrolledInfo: enrolledCourse[0]
                 }
         
         );
@@ -46,4 +45,3 @@ else{
         }
 
 }
->>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)

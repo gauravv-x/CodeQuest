@@ -22,8 +22,4 @@ function EnrolledCourses() {
     </div>;
 }
 
-<<<<<<< HEAD
 export default EnrolledCourses
-=======
-export default EnrolledCourses
->>>>>>> 0b2b047 (feat: initialize project with Next.js and Tailwind CSS setup)

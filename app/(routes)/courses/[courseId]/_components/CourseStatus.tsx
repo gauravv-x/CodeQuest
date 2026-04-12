@@ -23,7 +23,7 @@ function CourseStatus({ courseDetail }: Props) {
         let totalXP = 0;
         courseDetail?.chapters?.forEach((chapter)=>{
            totalExercises=totalExercises+chapter?.exercises?.length
-           chapter?.exercises?.forEach(exc =>{
+           chapter?.exercises?.forEach((exc)=>{
                 totalXP = totalXP + exc?.xp
            })
         })
@@ -34,6 +34,15 @@ function CourseStatus({ courseDetail }: Props) {
         })
     }
 
+    const UpdateProgress =(currentValue:number, totalValue:number)=>{
+        if(totalValue && totalValue ) {
+            const perc = (currentValue*100)/totalValue;
+            return perc
+        }
+
+        return 0;
+
+    }
 
   return (
     <div className='font-game p-4 border-4 rounded-xl w-full'>
@@ -51,8 +60,8 @@ function CourseStatus({ courseDetail }: Props) {
             <Image src={'/star.png'} alt="Book" width={50} height={50} />
             <div className='w-full'>
                 <h2 className='flex justify-between text-2xl'>XP Earned 
-                    <span className='text-gray-400'>1/{counts?.totalXP}</span></h2>
-                <Progress value={37} className='mt-2'/>
+                    <span className='text-gray-400'>{courseDetail?.courseEnrolledInfo?.xpEarned}/{counts?.totalXP}</span></h2>
+                <Progress value={UpdateProgress(courseDetail?.courseEnrolledInfo?.xpEarned??0 , counts?.totalXP)} className='mt-2'/>
             </div>
         </div>
         
