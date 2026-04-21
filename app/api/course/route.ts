@@ -1,8 +1,8 @@
 import EnrolledCourses from "@/app/(routes)/dashboard/components/EnrolledCourses";
 import { db } from "@/config/db";
-import { CourseChaptersTable, CoursesTable, EnrolledCourseTable } from "@/config/schema";
+import { CompleteExerciseTable, CourseChaptersTable, CoursesTable, EnrolledCourseTable } from "@/config/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { and, asc, eq } from "drizzle-orm";
+import { and, asc, desc, eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req:NextRequest) {
@@ -25,13 +25,23 @@ if(courseId){
         //@ts-ignore
         .where(and(eq(EnrolledCourseTable?.courseId, courseId),eq(EnrolledCourseTable?.userId, user?.primaryEmailAddress?.emailAddress)));
 
-        const isEnrolledCourse = enrolledCourse.length>0?true:false; 
+        const isEnrolledCourse = enrolledCourse.length>0?true:false;
+        
+        const completedExercises = await db.select().from(CompleteExerciseTable)
+        //@ts-ignore
+        .where(and(eq(CompleteExerciseTable?.courseId, courseId),eq(CompleteExerciseTable?.userId, user?.primaryEmailAddress?.emailAddress)
+        )).orderBy(desc(CompleteExerciseTable.courseId,),
+        desc(CompleteExerciseTable.chapterId));
+
         return NextResponse.json(
                 {
                 ...result[0], 
                 chapters: chapterResult,
                 userEnrolled: isEnrolledCourse,
-                courseEnrolledInfo: enrolledCourse[0]
+                courseEnrolledInfo: enrolledCourse[0],
+                completedExercises: completedExercises
+
+
                 }
         
         );

@@ -50,8 +50,9 @@ function CourseStatus({ courseDetail }: Props) {
             <Image src={'/book.png'} alt="Book" width={50} height={50} />
             <div className='w-full'>
                 <h2 className='flex justify-between text-2xl'>Exercise 
-                    <span className='text-gray-400'>1/{counts?.totalExcs}</span></h2>
-                <Progress value={37} className='mt-2'/>
+                    <span className='text-gray-400'>{courseDetail?.completedExcercises?.length}/{counts?.totalExcs}</span></h2>
+                {/* @ts-ignore */}
+                <Progress value={UpdateProgress(courseDetail?.completedExcercises?.length, counts?.totalExcs)} className='mt-2'/>
             </div>
         </div>
 
@@ -60,6 +61,7 @@ function CourseStatus({ courseDetail }: Props) {
             <div className='w-full'>
                 <h2 className='flex justify-between text-2xl'>XP Earned 
                     <span className='text-gray-400'>{courseDetail?.courseEnrolledInfo?.xpEarned}/{counts?.totalXP}</span></h2>
+                    {/* @ts-ignore */}
                 <Progress value={UpdateProgress(courseDetail?.courseEnrolledInfo?.xpEarned??0 , counts?.totalXP)} className='mt-2'/>
             </div>
         </div>
