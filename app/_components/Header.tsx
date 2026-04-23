@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { useParams, usePathname } from "next/navigation";
 
 const courses = [
   {
@@ -72,22 +73,29 @@ const courses = [
 
 function Header() {
   const {user}= useUser();
+  const path=usePathname();
+  const {exerciseslug} =useParams();
+  console.log(path);
+
+
   return (
-    <div className="p-4 max-w-7xl flex justify-between items-center w-full">
+    <div className="p-4 max-w-7xl flex justify-between items-center w-full font-game text-xl ">
       <div className="flex gap-2 items-center ">
         <Image src={"/logo.png"} width={40} height={40} alt={"CodeQuest"} />
         <h2 className="font-bold text-3xl font-game">CodeQuest</h2>
       </div>
       {/* Navbar  */}
+      {!exerciseslug ?
       <NavigationMenu>
         <NavigationMenuList className="gap-8">
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Courses</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="font-game text-xl">Courses</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid md:grid-cols-2 gap-2 sm:w-[400px] md:w-[500px] lg:w-[600px]">
                 {courses.map((course, index) => (
                   <div key={index}
                     className="p-2 hover:bg-accent rounded-xl cursor-pointer"
+                    
                   >
                     <h2 className="font-medium">{course.name}</h2>
                     <p className="text-sm text-gray-500 ">{course.desc}</p>
@@ -98,28 +106,30 @@ function Header() {
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink>
-              <Link href={"/project"}>Projects</Link>
+              <Link href={"/project"} className="font-game text-xl">Projects</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink>
-              <Link href={"/pricing"}>Pricing</Link>
+              <Link href={"/pricing"} className="font-game text-xl">Pricing</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <NavigationMenuLink>
-              <Link href={"/contact-us"}>Contact Us</Link>
+              <Link href={"/contact-us"} className="font-game text-xl">Contact Us</Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
-      </NavigationMenu>
+      </NavigationMenu>:
+      <h2 className="text-2xl">{exerciseslug?.toString()?.replaceAll("-"," ").toLocaleUpperCase()}</h2>
+      }
       {/* signup Button */}
       {!user? 
       <Link href={'sign-in'}>
         <Button variant={"pixel"} className="font-game text-2xl">Signin</Button> </Link> 
       :<div className="flex gap-4 items-center"><Button variant={"pixel"} className="font-game text-2xl">Dashboard</Button>
        <UserButton/>
-       </div>}
+      </div>}
       
     </div>
   );

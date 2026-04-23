@@ -14,6 +14,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import Link from 'next/link'
 
 type Props = {
     loading : boolean,
@@ -99,7 +100,9 @@ const EnableExercise = (
 
 
                         {EnableExercise(index, indexExc, chapter?.exercises?.length)?
+                        <Link href={'/courses/'+ courseDetail?.courseId + '/' + chapter?.courseId + '/' + exc?.slug}>
                           <Button variant={'pixel'}>{exc.xp} xp</Button>
+                        </Link>
                         :
                         isExerciseCompleted(chapter?.chapterId, indexExc + 1)?
                           <Button variant={'pixel'} className='bg-green-600'>Completed</Button>
