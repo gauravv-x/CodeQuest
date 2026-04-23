@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
 
     images: {
-    domains : ['ik.imagekit.io']
+    domains : ['ik.imagekit.io', 'drive.google.com']
       
     }
 
